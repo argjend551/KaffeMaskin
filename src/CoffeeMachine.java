@@ -1,0 +1,264 @@
+import java.util.Scanner;
+
+public class CoffeeMachine{
+    private int Coffee_Count;
+    private double water;
+    private double milk;
+    private double coffee_powder;
+    private int milkcount;
+    private int watercount;
+    private int coffepowdercount;
+    Scanner scan = new Scanner(System.in);
+
+
+    public CoffeeMachine() {
+        System.out.println("----------------------");
+        System.out.println("Coffee Machine");
+        System.out.println("----------------------");
+    }
+
+
+    private void MilkCoffee(){
+        Money("milkcoffee");
+        if(water<=0.3 || coffee_powder<=0 || milk<=0){
+            IngredientCount();
+            System.out.println("-------------------------");
+            System.out.println("not enough ingredients.");
+            System.out.println("-------------------------");
+
+        } else if  (water >= 0.3 && coffee_powder >= 10 && milk >= 0.2) {
+            System.out.println("--------------------------------------------------");
+            System.out.println("Taking 10mg of Coffee Powder");
+            System.out.println("Taking 0.2 liter of Water");
+            System.out.println("Taking 0.3 liter of Milk");
+            this.coffee_powder = coffee_powder - 10;
+            this.water = water - 0.3;
+            this.milk = milk - 0.2;
+
+            Coffee_Count = Coffee_Count + 1;
+
+            System.out.println("Your Milk Coffee is Ready.");
+            System.out.println("--------------------------------------------------");
+        }
+
+    }
+    private void BlackCoffe(){
+        Money("blackcoffee");
+
+        if(water <= 0.3 || coffee_powder<=0){
+
+            IngredientCount();
+            System.out.println("-------------------------");
+            System.out.println("not enough ingredients.");
+            System.out.println("-------------------------");
+
+
+        }  if (water >= 0.3 && coffee_powder >= 10) {
+            System.out.println("---------------------------------");
+            System.out.println("Taking 10mg of Coffee Powder");
+            System.out.println("Taking 0.2 liter of Water");
+            this.coffee_powder = coffee_powder - 10;
+            this.water = water -0.3;
+            Coffee_Count = Coffee_Count + 1;
+
+            System.out.println("Your Black Coffee is Ready.");
+            System.out.println("--------------------------------");
+        }
+
+    }
+    public void Money(String Coffe){
+        int money = 0;
+        System.out.println("Stoppa in pengar i maskinen");
+        System.out.println("hur mycket vill du stoppa in?");
+        money += scan.nextInt();
+        System.out.println("Maskinen tar emot dina pengar....");
+
+        while(true){
+
+
+        if(money == 20 && Coffe.equals("blackcoffee")){
+            break;
+
+        }
+            if(money == 22 && Coffe.equals("milkcoffee")){
+                break;
+
+            }
+
+        else if(money <= 19 && Coffe.equals("blackcoffee")){
+
+            System.out.println("You need to insert more money the black coffee costs 20kr you have inserted " + money + "kr");
+               money += scan.nextInt();
+
+
+            }
+        else if(money <= 21 && Coffe.equals("milkcoffee")){
+
+            System.out.println("You need to insert more money the milk coffee costs 22kr you have inserted " + money + "kr");
+            money += scan.nextInt();
+
+
+        }
+
+        else if(money > 20 && Coffe.equals("blackcoffee")){
+            money = money-20;
+            System.out.println("Maskinen tar emot dina pengar....");
+            System.out.println("växlar tillbaka " + money+ "kr");
+            break;
+        }
+        else if(money > 22 && Coffe.equals("milkcoffee")){
+            money = money-22;
+            System.out.println("Maskinen tar emot dina pengar....");
+            System.out.println("växlar tillbaka " + money+ "kr");
+            break;
+        }
+
+        }
+
+
+}
+
+
+    private void MakeCoffe(){
+        System.out.println("----------------------------------------------");
+        System.out.println("Chose Coffee");
+        System.out.println("1: Black Coffee  20;- ");
+        System.out.println("2: Milk Coffee   22;- ");
+        System.out.println("----------------------------------------------");
+
+        String Choice = scan.next();
+
+        while(true){
+            if(Choice.equals("1")){
+                BlackCoffe();
+                mainMenu();
+                break;
+            }
+            if(Choice.equals("2")){
+                MilkCoffee();
+                mainMenu();
+                break;
+            } else{
+                System.out.println("Choose a coffee please");
+            }
+
+            break;
+
+        }
+        Choice = scan.next();
+    }
+    private void CleanMachine(){
+        System.out.println("--------------------------------------------------");
+        System.out.println("Cleaning the machine....");
+        System.out.println("the machine have been cleaned.");
+        water = 0;
+        milk = 0;
+        coffee_powder = 0;
+        System.out.println("--------------------------------------------------");
+    }
+    private void GetIngredient(){
+        System.out.println("-------------------Status-------------------------");
+        System.out.println("Water: " + water + " Liter");
+        System.out.println("Milk: " + milk + " Liter");
+        System.out.println("Coffee Powder: " + coffee_powder + " Gram");
+        System.out.println("--------------------------------------------------");
+
+    }
+    private void SetIngredient(){
+        System.out.println("----------------------------------------------");
+
+        System.out.println("filling up 1 liter water...");
+        System.out.println("filling up 1 liter milk...");
+        System.out.println("filling up 200 grams of coffee powder...");
+        System.out.println("----------------------------------------------");
+        water = water + 1;
+        milk = 1;
+        coffee_powder = 200;
+    }
+
+    private void IngredientCount(){
+
+
+        if(milk <= 0.2){
+            milkcount += 1;
+        }
+        if(water <= 0.3){
+            watercount += 1;
+        }
+        if(coffee_powder <= 10){
+            coffepowdercount += 1;
+        }
+    }
+
+
+
+
+
+
+    public void mainMenu(){
+        System.out.println("1: Status of Ingredient");
+        System.out.println("2: Fill Ingredient");
+        System.out.println("3: Clean Machine");
+        System.out.println("4: Buy Coffee");
+        System.out.println("5: How many Coffee have we made?");
+        System.out.println("6: How many times have the ingredients run out");
+        System.out.println("7: Exit");
+        int choice = scan.nextInt();
+
+        while (true){
+
+            switch (choice){
+                case 1:
+                    GetIngredient();
+                    break;
+                case 2:
+                    SetIngredient();
+                    break;
+                case 3:
+                    CleanMachine();
+                    break;
+                case 4:
+                    MakeCoffe();
+                    break;
+                case 5:
+                    System.out.println("----------------------------------------------");
+                    System.out.println("We have made " + Coffee_Count + " Coffee's");
+                    System.out.println("----------------------------------------------");
+                    break;
+                case 6:
+                    System.out.println("Milk " + milkcount + " times");
+                    System.out.println("water " + watercount + " times");
+                    System.out.println("coffe powder " + coffepowdercount + " times");
+                    System.out.println("----------------------------------------------");
+                    break;
+
+                case 7:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+
+                default:
+                    System.out.println("choose between 1-7");
+
+            }
+            System.out.println("1: Status of Ingredient");
+            System.out.println("2: Fill Ingredient");
+            System.out.println("3: Clean Machine");
+            System.out.println("4: Buy Coffee");
+            System.out.println("5: How many Coffee have we made?");
+            System.out.println("6: How many times have the ingredients run out");
+            System.out.println("7: Exit");
+            choice = scan.nextInt();
+
+
+
+        }
+
+
+
+
+    }
+
+
+
+
+}
