@@ -10,6 +10,7 @@ public class CoffeeMachine{
     private int coffepowdercount;
     Scanner scan = new Scanner(System.in);
 
+// konstruktor
 
     public CoffeeMachine() {
         System.out.println("----------------------");
@@ -17,6 +18,12 @@ public class CoffeeMachine{
         System.out.println("----------------------");
     }
 
+
+    /*
+     MilkCoffe Metoden är själva kaffet om du väljer att du vill ha en milkcoffe då körs denna metod
+     den kontrollerar om det finns water,coffe powder, milk.
+     Money då skickas värdet "milkcoffe" till Money metoden där den kollar pris mm..
+     */
 
     private void MilkCoffee(){
         Money("milkcoffee");
@@ -41,8 +48,14 @@ public class CoffeeMachine{
             System.out.println("--------------------------------------------------");
         }
 
+        /*
+     BlackCoffee Metoden är själva kaffet om du väljer att du vill ha en blackcoffe då körs denna metod
+     den kontrollerar om det finns water,coffe powder, milk.
+     Money då skickas värdet "blackcoffe" till Money metoden där den kollar pris mm..
+     */
+
     }
-    private void BlackCoffe(){
+    private void BlackCoffee(){
         Money("blackcoffee");
 
         if(water <= 0.3 || coffee_powder<=0){
@@ -66,7 +79,13 @@ public class CoffeeMachine{
         }
 
     }
-    public void Money(String Coffe){
+
+    /*
+        Money metoden tar emot pengar du sätter in för att kunna köpa, du anger hur mycket pengar du vill sätta in
+        tills det är så mycket som kaffet kostar, om det är för lite pengar du satt in så körs koden att du måste sätta in mer
+     */
+
+    public int Money(String Coffe){
         int money = 0;
         System.out.println("Stoppa in pengar i maskinen");
         System.out.println("hur mycket vill du stoppa in?");
@@ -116,10 +135,12 @@ public class CoffeeMachine{
         }
 
 
-}
+        return  money;
+    }
 
+//MakeCoffee är en meny metod med if satser, om du väljer te.x 1 så körs koden under som är BlackCoffee(); och mainMenu();
 
-    private void MakeCoffe(){
+    private void MakeCoffee(){
         System.out.println("----------------------------------------------");
         System.out.println("Chose Coffee");
         System.out.println("1: Black Coffee  20;- ");
@@ -130,7 +151,7 @@ public class CoffeeMachine{
 
         while(true){
             if(Choice.equals("1")){
-                BlackCoffe();
+                BlackCoffee();
                 mainMenu();
                 break;
             }
@@ -147,6 +168,9 @@ public class CoffeeMachine{
         }
         Choice = scan.next();
     }
+
+    // Denna metoden ska städa ur maskinen alla ingredienser så den ger värdet 0 till dem.
+
     private void CleanMachine(){
         System.out.println("--------------------------------------------------");
         System.out.println("Cleaning the machine....");
@@ -156,6 +180,8 @@ public class CoffeeMachine{
         coffee_powder = 0;
         System.out.println("--------------------------------------------------");
     }
+
+    // denna metoden skriver ut alla ingredienser o visar hur mycket finns kvar
     private void GetIngredient(){
         System.out.println("-------------------Status-------------------------");
         System.out.println("Water: " + water + " Liter");
@@ -164,7 +190,10 @@ public class CoffeeMachine{
         System.out.println("--------------------------------------------------");
 
     }
-    private void SetIngredient(){
+
+    // denna metoden är för att fylla ingredienser då fylls det upp med värden.
+
+    public void SetIngredient(){
         System.out.println("----------------------------------------------");
 
         System.out.println("filling up 1 liter water...");
@@ -175,6 +204,12 @@ public class CoffeeMachine{
         milk = 1;
         coffee_powder = 200;
     }
+
+
+
+    /*
+     denna metoden räknar hur många gånger en ingrediens har tagit slut, då adderas det med 1 på vilken ingrediens tar slut.
+     */
 
     private void IngredientCount(){
 
@@ -193,7 +228,7 @@ public class CoffeeMachine{
 
 
 
-
+// MainMenu för att göra ditt val vad du vill göra.
 
     public void mainMenu(){
         System.out.println("1: Status of Ingredient");
@@ -218,7 +253,7 @@ public class CoffeeMachine{
                     CleanMachine();
                     break;
                 case 4:
-                    MakeCoffe();
+                    MakeCoffee();
                     break;
                 case 5:
                     System.out.println("----------------------------------------------");
@@ -259,6 +294,9 @@ public class CoffeeMachine{
     }
 
 
+// en getter för milk
 
-
+    public double getMilk() {
+        return milk;
+    }
 }

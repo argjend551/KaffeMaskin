@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Run{
@@ -9,7 +10,7 @@ public class Run{
 
         while (true){
 
-        if(Choice.equals("y")  || Choice.equals("y")){
+        if(Choice.equals("y")  || Choice.equals("Y")){
             coffee.mainMenu();
             break;
         }
